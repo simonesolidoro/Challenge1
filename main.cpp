@@ -1,6 +1,6 @@
 
 #include <iostream>
-#include "Gradiente.hpp"
+#include "Gradiente.cpp"
 #include "Parametri.h"
 #include <cmath>
 
