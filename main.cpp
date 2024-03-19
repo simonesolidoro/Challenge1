@@ -34,4 +34,4 @@ int main() {
     std::cout<<"la soluzione: "<<x_sol[0]<<" "<<x_sol[1]<<std::endl;
     return 0;
 }
-
+// prova recupero vecchio 
