@@ -1,0 +1,16 @@
+#-------------------------------------------------
+# Data file for numerical integration.
+#-------------------------------------------------
+[parametri]
+    
+        k          = 1000;
+    	tol_res    = 10e-6;
+    	tol_step   = 10e-6;
+   	alpha_zero = 0.05;
+    	mu         = 0.2;
+    	teta       = 0.04;
+[../]
+[x_iniziale]
+        x_zero     = 0.0;
+	x_uno      = 0.0;
+[../]
