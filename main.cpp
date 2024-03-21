@@ -32,12 +32,12 @@ int main() {
     unsigned int k= datafile("Parametri/k",1000);
     const double tol_res= datafile("Parametri/tol_res",10e-6);
     const double tol_step= datafile("Paraemtri/tol_step",10e-6);
-    const double alpha_zero= datafile("Paramtri/alpha_zero",0.05);
+    const double alpha_zero= datafile("Paramtri/alpha_zero",0.2);
     const double mu= datafile("Parametri/mu",0.2);
     const double teta= datafile("Parametri/teta",0.04);
     Parametri P{k,tol_res,tol_step,alpha_zero,xzero,mu,teta};
 
-    scelta T=expDec;
+    scelta T=A;
 
     if (T==expDec)
         Gradiente<expDec>(fun,dfun,P,x_sol);
