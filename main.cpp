@@ -21,7 +21,7 @@ std::vector<double> dfun(const std::vector<double> &x)
     V[1]= x[0]+2*x[1];      //derivata di fun rispetto X2
     return V;
 };
-int main() {
+int main(int argc, char **argv) {
        
     GetPot datafile("data");
     
@@ -36,14 +36,16 @@ int main() {
     const double mu= datafile("Parametri/mu",0.2);
     const double teta= datafile("Parametri/teta",0.04);
     Parametri P{k,tol_res,tol_step,alpha_zero,xzero,mu,teta};
+    
+    GetPot command_line(argc, argv);
 
-    scelta T=A;
+    int T= command_line("scelta", 3);
 
-    if (T==expDec)
+    if (T==1)
         Gradiente<expDec>(fun,dfun,P,x_sol);
-    if (T==invDec)
+    if (T==2)
         Gradiente<invDec>(fun,dfun,P,x_sol);
-    if (T==A)
+    if (T==3)
         Gradiente<A>(fun,dfun,P,x_sol);
 
     std::cout<<"la soluzione: "<<x_sol[0]<<" "<<x_sol[1]<<std::endl;

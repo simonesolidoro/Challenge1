@@ -14,5 +14,4 @@ clean:
 	rm $(OBJ)
 distclean:
 	rm $(OBJ) $(EXEC) 
-run:
-	./$(EXEC)
+
