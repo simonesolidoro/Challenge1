@@ -2,6 +2,8 @@
 #include "Parametri.h"
 #include <vector>
 #include <math.h>
+
+//dichiarazioni
 enum scelta {expDec, invDec, A};
 template <scelta T>
 void Gradiente(const std::function<double(const std::vector<double> &)> &, const std::function<std::vector<double>(const std::vector<double> &)> &, const Parametri, std::vector<double>&);
@@ -21,10 +23,10 @@ void Gradiente(const std::function<double(const std::vector<double> &)> &fun,
                const std::function<std::vector<double>(const std::vector<double> &)> &dfun,
                const Parametri P,
                std::vector<double> &x_sol){
-    std::vector<double> x_old(P.x_zero);
-    std::vector<double> x_new(P.x_zero);
+    std::vector<double> x_old(P.x_zero);  
+    std::vector<double> x_new(P.x_zero);  
     double alpha=P.alpha_zero;
-    unsigned int k=0;
+    unsigned int k=0;   // contatore iterazioni
     bool no_conv= 1;    // inizializzato vero per garantire prima iterazione
     while (no_conv) {
         //scelta di alpha
@@ -66,6 +68,7 @@ void Gradiente(const std::function<double(const std::vector<double> &)> &fun,
         }
 
     }
+    // rturn:copia ultima x_ner(soluzione) in reference x_sol
     for(size_t i=0; i<x_new.size();i++)
         x_sol[i]=x_new[i];
 }

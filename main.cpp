@@ -41,12 +41,15 @@ int main(int argc, char **argv) {
     Parametri P{k,tol_res,tol_step,alpha_zero,xzero,mu,teta};
     
 
-    if (T==1)
-        Gradiente<expDec>(fun,dfun,P,x_sol);
-    if (T==2)
-        Gradiente<invDec>(fun,dfun,P,x_sol);
-    if (T==3)
-        Gradiente<A>(fun,dfun,P,x_sol);
+    if (T==1){
+	 std::cout<<"scelta Exponential decay"<<std::endl;
+         Gradiente<expDec>(fun,dfun,P,x_sol);}
+    if (T==2){
+	 std::cout<<"scelta Inverse decay"<<std::endl;
+         Gradiente<invDec>(fun,dfun,P,x_sol);}
+    if (T==3){
+	 std::cout<<"scelta  Armijo rule"<<std::endl;
+         Gradiente<A>(fun,dfun,P,x_sol);}
 
     std::cout<<"la soluzione: x_1="<<x_sol[0]<<" x_2="<<x_sol[1]<<std::endl;
     
