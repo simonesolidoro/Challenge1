@@ -22,24 +22,24 @@ std::vector<double> dfun(const std::vector<double> &x)
     return V;
 };
 int main(int argc, char **argv) {
-       
-    GetPot datafile("data");
     
-    double x_zero= datafile("x_iniziale/x_zero",0.0);
-    double x_uno= datafile("x_iniziale/x_uno",0.0);
+    GetPot command_line(argc, argv);	
+    int T=command_line("scelta",3);
+
+    GetPot datafile("data");
+    double x_zero= datafile("data/x_iniziale/x_zero",0.0);
+    double x_uno= datafile("data/x_iniziale/x_uno",0.0);
+    unsigned int k= datafile("data/Parametri/k",1000);
+    const double tol_res= datafile("data/Parametri/tol_res",10e-6);
+    const double tol_step= datafile("data/Parametri/tol_step",10e-6);
+    const double alpha_zero= datafile("data/Parametri/alpha_zero",0.05);
+    const double mu= datafile("data/Parametri/mu",0.3);
+    const double teta= datafile("data/Parametri/teta",0.04);
+
     std::vector<double> xzero= {x_zero,x_uno};
     std::vector<double> x_sol(2);
-    unsigned int k= datafile("Parametri/k",1000);
-    const double tol_res= datafile("Parametri/tol_res",10e-6);
-    const double tol_step= datafile("Paraemtri/tol_step",10e-6);
-    const double alpha_zero= datafile("Paramtri/alpha_zero",0.2);
-    const double mu= datafile("Parametri/mu",0.2);
-    const double teta= datafile("Parametri/teta",0.04);
     Parametri P{k,tol_res,tol_step,alpha_zero,xzero,mu,teta};
     
-    GetPot command_line(argc, argv);
-
-    int T= command_line("scelta", 3);
 
     if (T==1)
         Gradiente<expDec>(fun,dfun,P,x_sol);
@@ -48,7 +48,8 @@ int main(int argc, char **argv) {
     if (T==3)
         Gradiente<A>(fun,dfun,P,x_sol);
 
-    std::cout<<"la soluzione: "<<x_sol[0]<<" "<<x_sol[1]<<std::endl;
+    std::cout<<"la soluzione: x_1="<<x_sol[0]<<" x_2="<<x_sol[1]<<std::endl;
+    
     return 0;
 }
 
