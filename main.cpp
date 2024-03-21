@@ -1,7 +1,7 @@
 
 #include <iostream>
 #include "GetPot"
-#include "Gradiente.cpp"
+#include "Gradiente.hpp"
 #include "Parametri.h"
 #include <cmath>
 
@@ -36,7 +36,16 @@ int main() {
     const double mu= datafile("Parametri/mu",0.2);
     const double teta= datafile("Parametri/teta",0.04);
     Parametri P{k,tol_res,tol_step,alpha_zero,xzero,mu,teta};
-    x_sol= Gradiente(fun,dfun,P);
+
+    scelta T=A;
+
+    if (T==expDec)
+        Gradiente<expDec>(fun,dfun,P,x_sol);
+    if (T==invDec)
+        Gradiente<invDec>(fun,dfun,P,x_sol);
+    if (T==A)
+        Gradiente<A>(fun,dfun,P,x_sol);
+
     std::cout<<"la soluzione: "<<x_sol[0]<<" "<<x_sol[1]<<std::endl;
     return 0;
 }
