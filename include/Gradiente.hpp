@@ -30,7 +30,7 @@ void Gradiente(const std::function<double(const std::vector<double> &)> &fun,
     bool no_conv= 1;    // inizializzato vero per garantire prima iterazione
     while (no_conv) {
         //scelta di alpha
-        //expoetial decay  T=int
+        //expoetial decay 
         if constexpr (T == expDec) {
             alpha = P.alpha_zero * std::exp(-P.mu * k);
         }
@@ -68,7 +68,7 @@ void Gradiente(const std::function<double(const std::vector<double> &)> &fun,
         }
 
     }
-    // rturn:copia ultima x_ner(soluzione) in reference x_sol
+    // rturn:copia ultima x_new(soluzione) in reference x_sol
     for(size_t i=0; i<x_new.size();i++)
         x_sol[i]=x_new[i];
 }
