@@ -37,7 +37,7 @@ int main() {
     const double teta= datafile("Parametri/teta",0.04);
     Parametri P{k,tol_res,tol_step,alpha_zero,xzero,mu,teta};
 
-    scelta T=A;
+    scelta T=expDec;
 
     if (T==expDec)
         Gradiente<expDec>(fun,dfun,P,x_sol);
