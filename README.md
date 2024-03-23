@@ -13,14 +13,19 @@ la compilazione avviene con il comando: make
 
 la scelta del metodo per la definizione del learning rate puo essere impostata spegificando dalla command line durante l'esecuzione del file main il parametro scelta:
  	./main scelta=1 ---> Exponential decay
+
 	./main scelta=2 ---> Inverse decay
+
 	./main scelta=3 ---> Armijo rule
+
         scelta di default: Armijo rule  
 
 la scelta del metodo per la definizione del learning rate puo essere impostata specificando dalla command line durante l'esecuzione del file main il parametro gradiente:
         ./main gradiente=1 ---> usato gradiente esatto
+
         ./main gradiente=0 ---> usata aprox con differenze finite centrate e h=0.01 (modifica di h direttamente in definizione di derivfun in Gradiente.hpp)
         di default: gradiente esatto 
+
 
 ex: make 
     ./main scelta=3 gradiente=1 
