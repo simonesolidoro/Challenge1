@@ -25,6 +25,7 @@ int main(int argc, char **argv) {
     
     GetPot command_line(argc, argv);	
     int T=command_line("scelta",3);
+    int d=command_line("gradiente",1);
 
     GetPot datafile("data");
     double x_zero= datafile("data/x_iniziale/x_zero",0.0);
@@ -42,14 +43,34 @@ int main(int argc, char **argv) {
     
 
     if (T==1){
-	 std::cout<<"scelta Exponential decay"<<std::endl;
-         Gradiente<expDec>(fun,dfun,P,x_sol);}
+	    std::cout<<"scelta Exponential decay"<<std::endl;
+	    if(d==1){
+		    std::cout<<"usato gradiente esatto"<<std::endl;
+		    Gradiente<expDec>(fun,dfun,P,x_sol);}
+	    else{
+		    std::cout<<"usata differenze finite centrate"<<std::endl;
+	            Gradiente<expDec>(fun,derivfun,P,x_sol);}
+    }
+
     if (T==2){
-	 std::cout<<"scelta Inverse decay"<<std::endl;
-         Gradiente<invDec>(fun,dfun,P,x_sol);}
+	    std::cout<<"scelta Inverse decay"<<std::endl;
+	    if(d==1){
+		    std::cout<<"usato gradiente esatto"<<std::endl;
+                    Gradiente<invDec>(fun,dfun,P,x_sol);}
+            else{
+                    std::cout<<"usata differenze finite centrate"<<std::endl;
+                    Gradiente<invDec>(fun,derivfun,P,x_sol);}
+    }
+
     if (T==3){
-	 std::cout<<"scelta  Armijo rule"<<std::endl;
-         Gradiente<A>(fun,dfun,P,x_sol);}
+	    std::cout<<"scelta Armijo rule"<<std::endl;
+            if(d==1){
+		    std::cout<<"usato gradiente esatto"<<std::endl;
+		    Gradiente<A>(fun,dfun,P,x_sol);}
+	    else{
+		    std::cout<<"usata differenze finite centrate"<<std::endl;
+		    Gradiente<A>(fun,derivfun,P,x_sol);}
+    }
 
     std::cout<<"la soluzione: x_1="<<x_sol[0]<<" x_2="<<x_sol[1]<<std::endl;
     
