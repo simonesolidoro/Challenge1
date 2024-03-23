@@ -26,22 +26,23 @@ void Gradiente(const std::function<double(const std::vector<double> &)> &fun,
     std::vector<double> x_old(P.x_zero);  
     std::vector<double> x_new(P.x_zero);  
     double alpha=P.alpha_zero;
+    double alpha_zero=P.alpha_zero; //copia di alphazero per non dover ogni volta richiamare P.alpha_zero
     unsigned int k=0;   // contatore iterazioni
     bool no_conv= 1;    // inizializzato vero per garantire prima iterazione
     while (no_conv) {
-        //scelta di alpha
+        //scelta di alpha, (if constexpr valutato at compile time quindi anche se in while rimane efficiente)
         //expoetial decay 
         if constexpr (T == expDec) {
-            alpha = P.alpha_zero * std::exp(-P.mu * k);
+            alpha = alpha_zero * std::exp(-P.mu * k);
         }
         //inverse decay
         if constexpr (T == invDec ) {
-            alpha = P.alpha_zero / (1 + P.mu * k);
+            alpha = alpha_zero / (1 + P.mu * k);
         }
         // Armijo
 
         if constexpr (T == A) {
-            alpha = P.alpha_zero; // ad ogni step ricerca di nuova alpha riparte da alpha_zero
+            alpha = alpha_zero; // ad ogni step ricerca di nuova alpha riparte da alpha_zero
             // Armijo rule, check if the sufficient decrease condition is satisfied
             while ((fun(x_old) - fun(sotVet(x_old, Prod_sca_vett(alpha, dfun(x_old))))) < P.teta * alpha * pow(norma(dfun(x_old)), 2)) {
                 alpha *= 0.5;
