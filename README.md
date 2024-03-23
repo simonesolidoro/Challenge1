@@ -30,6 +30,10 @@ la scelta del metodo per la definizione del learning rate puo essere impostata s
 
 
 ex:
-	 make 
-    	./main scelta=3 gradiente=1 
+
+         make
+ 
+    	./main scelta=3 gradiente=1
+
+	make distclean
 
