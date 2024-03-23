@@ -6,7 +6,7 @@
 //dichiarazioni
 enum scelta {expDec, invDec, A};
 template <scelta T>
-void Gradiente(const std::function<double(const std::vector<double> &)> &, const std::function<std::vector<double>(const std::vector<double> &)> &, const Parametri, std::vector<double>&);
+void Gradiente(const std::function<double(const std::vector<double> &)> &, const std::function<std::vector<double>(const std::vector<double> &)> &, const Parametri &, std::vector<double>&);
 
 double norma(const std::vector<double> &x);   // norma di vettore
 
@@ -21,7 +21,7 @@ double norma_di_diff(const std::vector<double> &,const std::vector<double> &); /
 template <scelta T>
 void Gradiente(const std::function<double(const std::vector<double> &)> &fun,
                const std::function<std::vector<double>(const std::vector<double> &)> &dfun,
-               const Parametri P,
+               const Parametri & P,
                std::vector<double> &x_sol){
     std::vector<double> x_old(P.x_zero);  
     std::vector<double> x_new(P.x_zero);  
