@@ -16,6 +16,8 @@ std::vector<double> Prod_sca_vett(const double c, const std::vector<double> &x);
 
 double norma_di_diff(const std::vector<double> &,const std::vector<double> &); // unione di sotVet e norma per fare unico ciclo for
 
+double fun(const std::vector<double> &x); // fun definita in main ridichiarata per usarla in differenze finite
+std::vector<double> derivfun(const std::vector<double> &x); // calcola gradiente con metodo differenze finite centrate ed h=0.01
 
 // definizioni
 template <scelta T>
@@ -72,7 +74,16 @@ void Gradiente(const std::function<double(const std::vector<double> &)> &fun,
     // rturn:copia ultima x_new(soluzione) in reference x_sol
     for(size_t i=0; i<x_new.size();i++)
         x_sol[i]=x_new[i];
-}
+};
+
+//calcolo gradiente con diff finite
+std::vector<double> derivfun(const std::vector<double> &x){
+	std::vector<double> V(2);
+	const double h=0.01;
+	V[0]= ( fun({x[0]+h,x[1]}) - fun({x[0]-h,x[1]}) )/(2*h);   //derivata di fun rispetto X1
+	V[1]= ( fun({x[0],x[1]+h}) - fun({x[0],x[1]-h}) )/(2*h);      //derivata di fun rispetto X2
+	return V;
+};
 
 // funzioni ausiliarie
 
